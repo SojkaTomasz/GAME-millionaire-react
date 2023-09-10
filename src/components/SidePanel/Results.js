@@ -1,66 +1,35 @@
 function Results() {
+	const tableCash = [
+		{ number: 1, cash: "100 $", safeCash: false, active: false },
+		{ number: 2, cash: "200 $ ", safeCash: false, active: true },
+		{ number: 3, cash: "300 $", safeCash: false, active: false },
+		{ number: 4, cash: "500 $", safeCash: false, active: false },
+		{ number: 5, cash: "1 000 $", safeCash: true, active: false },
+		{ number: 6, cash: "2 000 $", safeCash: false, active: false },
+		{ number: 7, cash: "4 000 $", safeCash: false, active: false },
+		{ number: 8, cash: "8 000 $", safeCash: false, active: false },
+		{ number: 9, cash: "16 000 $", safeCash: false, active: false },
+		{ number: 10, cash: "36 000 $", safeCash: true, active: false },
+		{ number: 11, cash: "64 000 $", safeCash: false, active: false },
+		{ number: 12, cash: "128 000 $", safeCash: false, active: false },
+		{ number: 13, cash: "250 000 $", safeCash: false, active: false },
+		{ number: 14, cash: "500 000 $", safeCash: false, active: false },
+		{ number: 15, cash: "1 000 000 $", safeCash: true, active: false },
+	]
+
 	return (
 		<ul className='results' type='number'>
-			<li className='cash cash-prom'>
-				<p>15</p>
-				<span>1 000 000 $</span>
-			</li>
-			<li className='cash'>
-				<p>14</p>
-				<span>500 000 $</span>
-			</li>
-			<li className='cash'>
-				<p>13</p>
-				<span>250 000 $</span>
-			</li>
-			<li className='cash'>
-				<p>12</p>
-				<span>128 000 $</span>
-			</li>
-			<li className='cash'>
-				<p>11</p>
-				<span>62 000 $</span>
-			</li>
-			<li className='cash cash-prom'>
-				<p>10</p>
-				<span>32 000 $</span>
-			</li>
-			<li className='cash'>
-				<p>9</p>
-				<span>16 000 $</span>
-			</li>
-			<li className='cash'>
-				<p>8</p>
-				<span>8 000 $</span>
-			</li>
-			<li className='cash'>
-				<p>7</p>
-				<span>4 000 $</span>
-			</li>
-			<li className='cash'>
-				<p>6</p>
-				<span>2 000 $</span>
-			</li>
-			<li className='cash cash-prom'>
-				<p>5</p>
-				<span>1 000 $</span>
-			</li>
-			<li className='cash'>
-				<p>4</p>
-				<span>500 $</span>
-			</li>
-			<li className='cash'>
-				<p>3</p>
-				<span>300 $</span>
-			</li>
-			<li className='cash'>
-				<p>2</p>
-				<span>200 $</span>
-			</li>
-			<li className='cash cash-active'>
-				<p>1</p>
-				<span>100 $</span>
-			</li>
+			{tableCash.reverse().map(item => (
+				<li
+					key={item.number}
+					className={`cash ${item.safeCash ? "safe-cash" : ""} ${
+						item.active ? "cash-active" : ""
+					}`}
+				>
+					<p>{item.number}</p>
+					<p>{item.cash}</p>
+				</li>
+			))}
 		</ul>
 	)
 }

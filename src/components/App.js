@@ -5,7 +5,9 @@ import "./styles/app.css"
 function App() {
 	return (
 		<div className='box-app'>
-			<div className="background-question" ><Question /></div>
+			<div className='background-question'>
+				<Question />
+			</div>
 			<SidePanel />
 		</div>
 	)

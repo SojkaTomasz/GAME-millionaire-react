@@ -1,9 +1,30 @@
 function HelpButtons() {
+	const btnHelp = [
+		{ id: 1, text: "50:50", className: "btn-help", active: false },
+		{
+			id: 2,
+			text: <i className='fa-solid fa-phone-flip'></i>,
+			className: "btn-help",
+			active: true,
+		},
+		{
+			id: 3,
+			text: <i className='fa-solid fa-users'></i>,
+			className: "btn-help",
+			active: false,
+		},
+	]
+
 	return (
 		<div>
-			<button className="btn-help">50:50</button>
-			<button className="btn-help used-help"><i class="fa-solid fa-phone-flip"></i></button>
-			<button className="btn-help used-help"><i class="fa-solid fa-users"></i></button>
+			{btnHelp.map(item => (
+				<button
+					key={item.id}
+					className={`${item.className} ${item.active && "used-help"}`}
+				>
+					{item.text}
+				</button>
+			))}
 		</div>
 	)
 }

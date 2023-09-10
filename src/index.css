@@ -4,7 +4,17 @@
 	margin: 0;
 }
 
+html{
+	font-size: 62.5%;
+}
+
+p, span, button{
+	font-size: 2rem;
+}
+
 body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
 		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
+
+

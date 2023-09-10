@@ -9,16 +9,16 @@ function Question() {
 			</p>
 			<div className='box-answers'>
 				<button className='answers style-question'>
-					<span>A: </span>Tracer
+					<span style={{ color: "orange" }}>A: </span>Tracer
 				</button>
 				<button className='answers style-question'>
-					<span>B: </span>Widowmaker
+					<span style={{ color: "orange" }}>B: </span>Widowmaker
 				</button>
 				<button className='answers style-question'>
-					<span>C: </span>Sombra
+					<span style={{ color: "orange" }}>C: </span>Sombra
 				</button>
 				<button className='answers style-question'>
-					<span className=''>D: </span>Symmetra
+					<span style={{ color: "orange" }}>D: </span>Symmetra
 				</button>
 			</div>
 		</div>

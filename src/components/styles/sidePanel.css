@@ -2,31 +2,32 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	list-style: none;
-	padding: 10px;
-	color: orange;
+	align-items: center;
 	width: 90%;
 	height: 90%;
+	padding: 10px;
+	list-style: none;
+	color: orange;
+	z-index: 0;
 }
 
 .cash {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	width: 100%;
 	margin: 5px 0;
+	align-items: center;
 }
 
-.cash-prom {
+.safe-cash {
 	color: white;
 }
 
 .btn-help {
 	position: relative;
+	width: 70px;
+	height: 35px;
 	margin: 5px;
-	width: 45px;
-	height: 25px;
-	border-radius: 50%;
-	background: rgb(20, 19, 21);
 	background: linear-gradient(
 		126deg,
 		rgba(20, 19, 21, 1) 0%,
@@ -34,6 +35,7 @@
 	);
 	color: white;
 	border: 2px solid #196298;
+	border-radius: 50%;
 	box-shadow: 0px 0px 5px 0px #154d78;
 	cursor: pointer;
 	transition: transform 0.4s;
@@ -48,10 +50,10 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+	transform: rotate(35deg) translateX(10px) translateY(10px);
 	width: 100%;
-	border-radius: 3px;
 	height: 3px;
-	transform: rotate(35deg) translateX(5.5px) translateY(8px);
+	border-radius: 3px;
 	background-color: tomato;
 	animation: used-help 0.5s linear forwards;
 }
@@ -60,11 +62,11 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+	transform: rotate(-35deg) translateX(-10px) translateY(10px);
 	width: 100%;
 	height: 3px;
 	border-radius: 3px;
-	transform: rotate(-35deg) translateX(-5.5px) translateY(8px);
-	background-color: tomato;
+	background-color: #ff6347;
 	animation: used-help 0.5s linear forwards;
 }
 
@@ -78,24 +80,37 @@
 }
 
 .cash-active {
+	position: relative;
+	padding: 5px 10px;
+	margin: -1px;
+	background: linear-gradient(
+		183deg,
+		orange 0%,
+		rgb(185, 122, 5) 70%
+	);
+	color: white;
+	border: 1px solid white;
+	border-radius: 25px;
+	box-sizing: content-box;
+	box-shadow: inset 0 0 5px 0 black, 0 0 2px 0 black;
+}
+
+.cash-active::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 2px;
+	width: 200%;
+	background-color: white;
+	box-shadow: 0 0 2px 0 black;
+	z-index: -1;
 }
 
 @media (min-width: 575px) {
 }
 @media (min-width: 768px) {
-	.btn-help {
-		width: 55px;
-		height: 35px;
-	}
-	.used-help::before {
-
-		transform: rotate(35deg) translateX(9px) translateY(9px);
-
-	}
-	.used-help::after {
-
-		transform: rotate(-35deg) translateX(-9px) translateY(9px);
-	}
 }
 @media (min-width: 992px) {
 }

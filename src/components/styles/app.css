@@ -1,3 +1,7 @@
+.box-app {
+	position: relative;
+}
+
 .background-question {
 	position: relative;
 	background-image: url(../image/background.jpg);
@@ -17,12 +21,13 @@
 }
 
 .box-side-panel {
+	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
 	padding: 10px;
-	border-top: 3px ridge gray;
+	border-top: 3px ridge #bebebe;
 	background: rgb(126, 121, 153);
 	background: radial-gradient(
 		ellipse at left,
@@ -38,9 +43,9 @@
 	}
 	.box-side-panel {
 		height: 100vh;
-		min-width: 250px;
+		min-width: 280px;
 		border-top: none;
-		border-left: 3px ridge gray;
+		border-left: 3px ridge #bebebe;
 	}
 
 	.background-question {
@@ -53,11 +58,11 @@
 }
 @media (min-width: 768px) {
 	.box-side-panel {
-		min-width: 280px;
+		min-width: 300px;
 	}
 }
 @media (min-width: 992px) {
 	.box-side-panel {
-		min-width: 320px;
+		min-width: 350px;
 	}
 }
