@@ -12,7 +12,7 @@ function Question() {
 	const { addPoints } = useContext(ResultsUserContext)
 	const { difficulty } = useContext(DifficultyContext)
 
-	const { allQuestions, actualQuestion, answers, indexAnswers } = state
+	const { allQuestions, actualQuestion, actualAnswers } = state
 
 	useEffect(() => {
 		const getData = async () => {
@@ -32,21 +32,16 @@ function Question() {
 		if (allQuestions) {
 			findQuestion()
 		}
-	}, [allQuestions])
+	}, [allQuestions, difficulty])
 
 	const findQuestion = () => {
 		const newArrowQuestions = [...allQuestions]
+
 		const findQuestion = newArrowQuestions.find(
 			item => item.difficulty === difficulty
 		)
 		dispatch({ type: "actualQuestion", actualQuestion: findQuestion })
-		drawIndex()
-		const answers = []
-		answers.push(...findQuestion.incorrect_answers, findQuestion.correct_answer)
-		dispatch({ type: "answers", answers: answers })
-	}
 
-	const drawIndex = () => {
 		const index = []
 		while (index.length < 4) {
 			const number = Math.floor(Math.random() * 4)
@@ -54,7 +49,26 @@ function Question() {
 				index.push(number)
 			}
 		}
-		dispatch({ type: "indexAnswers", indexAnswers: index })
+
+		const answers = []
+		answers.push(...findQuestion.incorrect_answers, findQuestion.correct_answer)
+
+		const mixedAnswers = []
+		for (const key in answers) {
+			mixedAnswers.push(answers[index[key]])
+		}
+
+		const options = ["A", "B", "C", "D"]
+
+		const actualAnswers = []
+		for (let i = 0; i < 4; i++) {
+			actualAnswers.push({
+				options: options[i],
+				answers: mixedAnswers[i],
+			})
+		}
+
+		dispatch({ type: "actualAnswers", actualAnswers: actualAnswers })
 	}
 
 	const clickAnswersHandle = value => {
@@ -65,7 +79,6 @@ function Question() {
 				item => item.question !== actualQuestion.question
 			)
 			dispatch({ type: "allQuestions", allQuestions: delateQuestion })
-			findQuestion()
 		} else {
 		}
 	}
@@ -78,24 +91,16 @@ function Question() {
 				className='question'
 				dangerouslySetInnerHTML={{ __html: actualQuestion.question }}
 			></p>
-
 			<div className='box-answers'>
-				<button onClick={() => clickAnswersHandle(answers[indexAnswers[0]])}>
-					<span style={{ color: "orange" }}>A: </span>
-					<span dangerouslySetInnerHTML={{ __html: answers[indexAnswers[0]] }}></span>
-				</button>
-				<button onClick={() => clickAnswersHandle(answers[indexAnswers[1]])}>
-					<span style={{ color: "orange" }}>B: </span>
-					<span dangerouslySetInnerHTML={{ __html: answers[indexAnswers[1]] }}></span>
-				</button>
-				<button onClick={() => clickAnswersHandle(answers[indexAnswers[2]])}>
-					<span style={{ color: "orange" }}>C: </span>
-					<span dangerouslySetInnerHTML={{ __html: answers[indexAnswers[2]] }}></span>
-				</button>
-				<button onClick={() => clickAnswersHandle(answers[indexAnswers[3]])}>
-					<span style={{ color: "orange" }}>D: </span>
-					<span dangerouslySetInnerHTML={{ __html: answers[indexAnswers[3]] }}></span>
-				</button>
+				{actualAnswers.map(answers => (
+					<button
+						key={answers.answers}
+						onClick={() => clickAnswersHandle(answers.answers)}
+					>
+						<span style={{ color: "orange" }}>{answers.options}: </span>
+						<span dangerouslySetInnerHTML={{ __html: answers.answers }}></span>
+					</button>
+				))}
 			</div>
 		</div>
 	)
