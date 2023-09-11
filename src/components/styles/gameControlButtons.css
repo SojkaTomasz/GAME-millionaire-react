@@ -9,6 +9,7 @@
 	border: 1px solid black;
 	border-radius: 10px;
 	color: white;
+	text-transform: uppercase;
 	background: linear-gradient(26deg, rgb(40, 39, 40) 0%, rgba(9, 10, 13, 1) 83%);
 	transition: transform 0.3s;
 	cursor: pointer;
