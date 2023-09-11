@@ -1,0 +1,62 @@
+.help-buttons {
+	position: relative;
+	width: 70px;
+	height: 35px;
+	margin: 5px;
+	background: linear-gradient(
+		126deg,
+		rgba(20, 19, 21, 1) 0%,
+		rgba(9, 10, 13, 1) 83%
+	);
+	color: white;
+	border: 2px solid #196298;
+	border-radius: 50%;
+	box-shadow: 0px 0px 5px 0px #154d78;
+	cursor: pointer;
+	transition: transform 0.4s;
+}
+
+.help-buttons:hover {
+	transform: scale(1.05);
+}
+
+.used-help-buttons::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: rotate(35deg) translateX(10px) translateY(10px);
+	width: 100%;
+	height: 3px;
+	border-radius: 3px;
+	background-color: tomato;
+	animation: used-help-buttons 0.5s linear forwards;
+}
+.used-help-buttons::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: rotate(-35deg) translateX(-10px) translateY(10px);
+	width: 100%;
+	height: 3px;
+	border-radius: 3px;
+	background-color: #ff6347;
+	animation: used-help-buttons 0.5s linear forwards;
+}
+
+@keyframes used-help-buttons {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@media (min-width: 575px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+}

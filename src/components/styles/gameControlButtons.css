@@ -1,10 +1,10 @@
-.tooltip {
+.tooltip-game-control-buttons {
 	position: relative;
 	display: inline-block;
 	margin: 5px;
 }
 
-.tooltip button {
+.tooltip-game-control-buttons button {
 	padding: 5px 10px;
 	border: 1px solid black;
 	border-radius: 10px;
@@ -14,11 +14,11 @@
 	cursor: pointer;
 }
 
-.tooltip:hover {
+.tooltip-game-control-buttons:hover {
 	transform: scale(1.02);
 }
 
-.tooltip .tooltiptext {
+.tooltip-game-control-buttons .tooltip-text-game-control-buttons {
 	visibility: hidden;
 	width: 160px;
 	background-color: #333;
@@ -35,7 +35,7 @@
 	transition: opacity 0.8s, visibility 0.2s;
 }
 
-.tooltip:hover .tooltiptext {
+.tooltip-game-control-buttons:hover .tooltip-text-game-control-buttons {
 	visibility: visible;
 	opacity: 1;
 }

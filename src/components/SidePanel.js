@@ -1,6 +1,6 @@
 import Results from "./SidePanel/Results"
 import HelpButtons from "./SidePanel/HelpButtons"
-import BtnGameControl from "./SidePanel/BtnGameControl"
+import GameControlButtons from "./SidePanel/GameControlButtons"
 import "./styles/sidePanel.css"
 
 function SidePanel() {
@@ -9,7 +9,7 @@ function SidePanel() {
 			<div className='box-side-panel'>
 				<HelpButtons />
 				<Results />
-				<BtnGameControl />
+				<GameControlButtons />
 			</div>
 		</>
 	)

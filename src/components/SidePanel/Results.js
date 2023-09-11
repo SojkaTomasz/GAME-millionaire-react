@@ -1,3 +1,5 @@
+import "../styles/results.css"
+
 function Results() {
 	const tableCash = [
 		{ number: 1, cash: "100 $", safeCash: false, active: false },
@@ -18,12 +20,12 @@ function Results() {
 	]
 
 	return (
-		<ul className='results' type='number'>
+		<ul className='box-results' type='number'>
 			{tableCash.reverse().map(item => (
 				<li
 					key={item.number}
-					className={`cash ${item.safeCash ? "safe-cash" : ""} ${
-						item.active ? "cash-active" : ""
+					className={`cash-results ${item.safeCash ? "safe-cash-results" : ""} ${
+						item.active ? "cash-active-results" : ""
 					}`}
 				>
 					<p>{item.number}</p>
