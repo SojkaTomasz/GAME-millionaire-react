@@ -1,9 +1,13 @@
+import { useContext, useEffect, useState } from "react"
+import PointsContext from "../../context/pointsContext"
 import "../styles/results.css"
 
 function Results() {
-	const tableCash = [
+	const pointsContext = useContext(PointsContext)
+
+	const [tableCash, setTableCash] = useState([
 		{ number: 1, cash: "100 $", safeCash: false, active: false },
-		{ number: 2, cash: "200 $ ", safeCash: false, active: true },
+		{ number: 2, cash: "200 $ ", safeCash: false, active: false },
 		{ number: 3, cash: "300 $", safeCash: false, active: false },
 		{ number: 4, cash: "500 $", safeCash: false, active: false },
 		{ number: 5, cash: "1 000 $", safeCash: true, active: false },
@@ -17,7 +21,18 @@ function Results() {
 		{ number: 13, cash: "250 000 $", safeCash: false, active: false },
 		{ number: 14, cash: "500 000 $", safeCash: false, active: false },
 		{ number: 15, cash: "1 000 000 $", safeCash: true, active: false },
-	]
+	])
+
+	useEffect(() => {
+		let newTableCash = [...tableCash]
+		newTableCash.filter(item => {
+			if (item.number === pointsContext.points) {
+				item.active = true
+			} else item.active = false
+			return
+		})
+		setTableCash(newTableCash)
+	}, [pointsContext.points])
 
 	return (
 		<ul className='box-results' type='number'>

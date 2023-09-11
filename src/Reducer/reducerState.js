@@ -3,6 +3,7 @@ export const initialState = {
 	actualQuestion: null,
 	answers: null,
 	indexAnswers: null,
+	difficulty: "easy",
 
 	points: 0,
 }
@@ -17,6 +18,8 @@ export const reducer = (state, action) => {
 			return { ...state, answers: action.answers }
 		case "indexAnswers":
 			return { ...state, indexAnswers: action.indexAnswers }
+		case "difficulty":
+			return { ...state, difficulty: action.difficulty }
 
 		case "points":
 			return { ...state, points: action.points }
