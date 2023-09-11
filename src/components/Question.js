@@ -1,6 +1,7 @@
 import { useContext, useEffect, useReducer } from "react"
 import { initialState, reducer } from "../Reducer/reducerState"
-import PointsContext from "../context/pointsContext"
+import ResultsUserContext from "../context/resultsUserContext"
+import DifficultyContext from "../context/difficultyContext"
 import axios from "axios"
 import "./styles/question.css"
 
@@ -8,25 +9,24 @@ const URL = "https://opentdb.com/api.php?amount=50&type=multiple"
 
 function Question() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const pointsContext = useContext(PointsContext)
+	const { addPoints } = useContext(ResultsUserContext)
+	const { difficulty } = useContext(DifficultyContext)
 
-	const { allQuestions, actualQuestion, answers, indexAnswers, difficulty } =
-		state
+	const { allQuestions, actualQuestion, answers, indexAnswers } = state
 
 	useEffect(() => {
+		const getData = async () => {
+			try {
+				const data = await axios.get(URL)
+				dispatch({ type: "allQuestions", allQuestions: data.data.results })
+			} catch (ex) {
+				console.log(ex)
+			}
+		}
 		if (!allQuestions) {
 			getData()
 		}
-	}, [])
-
-	const getData = async () => {
-		try {
-			const data = await axios.get(URL)
-			dispatch({ type: "allQuestions", allQuestions: data.data.results })
-		} catch (ex) {
-			console.log(ex)
-		}
-	}
+	}, [allQuestions])
 
 	useEffect(() => {
 		if (allQuestions) {
@@ -59,7 +59,7 @@ function Question() {
 
 	const clickAnswersHandle = value => {
 		if (value === actualQuestion.correct_answer) {
-			pointsContext.addPoints()
+			addPoints()
 			const newArrowQuestions = [...allQuestions]
 			const delateQuestion = newArrowQuestions.filter(
 				item => item.question !== actualQuestion.question

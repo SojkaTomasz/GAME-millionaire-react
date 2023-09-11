@@ -1,7 +1,8 @@
 import SidePanel from "./SidePanel"
 import Question from "./Question"
 import TopResults from "./TopResults"
-import PointsContext from "../context/pointsContext"
+import ResultsUserContext from "../context/resultsUserContext"
+import DifficultyContext from "../context/difficultyContext"
 import "./styles/app.css"
 import { reducer, initialState } from "../Reducer/reducerState"
 import { useReducer } from "react"
@@ -10,22 +11,39 @@ function App() {
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	return (
-		<PointsContext.Provider
+		<DifficultyContext.Provider
 			value={{
-				points: state.points,
-				addPoints: () => {
-					dispatch({ type: "points", points: state.points + 1 })
+				difficulty: state.difficulty,
+				changeDifficulty: difficulty => {
+					dispatch({ type: "difficulty", difficulty: difficulty })
 				},
 			}}
 		>
-			<div className='box-app'>
-				<TopResults />
-				<div className='background-question'>
-					<Question />
+			<ResultsUserContext.Provider
+				value={{
+					points: state.points,
+					cash: state.cash,
+					safeCash: state.safeCash,
+					addPoints: () => {
+						dispatch({ type: "points", points: state.points + 1 })
+					},
+					addCash: cash => {
+						dispatch({ type: "cash", cash: cash })
+					},
+					addSafeCash: cash => {
+						dispatch({ type: "safeCash", safeCash: cash })
+					},
+				}}
+			>
+				<div className='box-app'>
+					<TopResults />
+					<div className='background-question'>
+						<Question />
+					</div>
+					<SidePanel />
 				</div>
-				<SidePanel />
-			</div>
-		</PointsContext.Provider>
+			</ResultsUserContext.Provider>
+		</DifficultyContext.Provider>
 	)
 }
 
