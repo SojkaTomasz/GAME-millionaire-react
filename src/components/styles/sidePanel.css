@@ -17,10 +17,15 @@
 
 @media (min-width: 575px) {
 	.box-side-panel {
-		height: 100vh;
 		min-width: 280px;
 		border-top: none;
 		border-left: 3px ridge #bebebe;
+	}
+}
+@media (max-height: 680px) {
+	.box-side-panel {
+		border-top: 3px ridge #bebebe;
+		border-left: none;
 	}
 }
 @media (min-width: 768px) {

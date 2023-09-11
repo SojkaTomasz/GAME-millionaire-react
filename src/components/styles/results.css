@@ -49,6 +49,14 @@
 }
 
 @media (min-width: 575px) {
+	.box-results {
+		width: 90%;
+	}
+}
+@media (max-height: 680px) and (min-width: 768px) {
+	.box-results {
+		width: 50%;
+	}
 }
 @media (min-width: 768px) {
 }

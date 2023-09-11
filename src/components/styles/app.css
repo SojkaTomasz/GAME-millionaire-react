@@ -1,5 +1,6 @@
 .box-app {
 	position: relative;
+	min-height: 100vh
 }
 
 .background-question {
@@ -26,10 +27,16 @@
 	}
 	.background-question {
 		flex-grow: 1;
-		height: 100vh;
+
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
+	}
+}
+@media (max-height: 680px) {
+	.box-app {
+		display: flex;
+		flex-direction: column;
 	}
 }
 @media (min-width: 768px) {
