@@ -6,6 +6,8 @@ export const initialState = {
 
 	showCorrectAnswers: false,
 
+	finishGame: false,
+
 	cash: "0 $",
 	safeCash: "0 $",
 
@@ -25,6 +27,9 @@ export const reducer = (state, action) => {
 
 		case "showCorrectAnswers":
 			return { ...state, showCorrectAnswers: action.showCorrectAnswers }
+
+		case "finishGame":
+			return { ...state, finishGame: action.finishGame }
 
 		case "cash":
 			return { ...state, cash: action.cash }

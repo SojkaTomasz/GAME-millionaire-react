@@ -24,6 +24,7 @@ function App() {
 					points: state.points,
 					cash: state.cash,
 					safeCash: state.safeCash,
+					finishGame: state.finishGame,
 					addPoints: () => {
 						dispatch({ type: "points", points: state.points + 1 })
 					},
@@ -32,6 +33,9 @@ function App() {
 					},
 					addSafeCash: cash => {
 						dispatch({ type: "safeCash", safeCash: cash })
+					},
+					handleFinishGame: () => {
+						dispatch({ type: "finishGame", finishGame: true })
 					},
 				}}
 			>

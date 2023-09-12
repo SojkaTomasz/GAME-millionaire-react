@@ -7,6 +7,8 @@ const ResultsUserContext = React.createContext({
 	addCash: () => {},
 	safeCash: "",
 	addSafeCash: () => {},
+	finishGame: false,
+	handleFinishGame: () => {},
 })
 
 ResultsUserContext.displayName = "ResultsUserContext"
