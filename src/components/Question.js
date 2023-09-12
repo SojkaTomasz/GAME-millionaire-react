@@ -3,6 +3,7 @@ import FinishGame from "./FinishGame"
 import { initialState, reducer } from "../Reducer/reducerState"
 import ResultsUserContext from "../context/resultsUserContext"
 import DifficultyContext from "../context/difficultyContext"
+import GameControlContext from "../context/gameControlContext"
 import axios from "axios"
 import "./styles/question.css"
 
@@ -10,8 +11,8 @@ const URL = "https://opentdb.com/api.php?amount=50&type=multiple"
 
 function Question() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const { addPoints, finishGame, handleFinishGame } =
-		useContext(ResultsUserContext)
+	const { addPoints } = useContext(ResultsUserContext)
+	const { finishGame, handleFinishGame } = useContext(GameControlContext)
 	const { difficulty } = useContext(DifficultyContext)
 
 	const { allQuestions, actualQuestion, actualAnswers, showCorrectAnswers } =
