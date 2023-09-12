@@ -3,7 +3,7 @@
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-	width: 90%;
+	width: 80%;
 	height: 90%;
 	padding: 10px;
 	list-style: none;
@@ -49,9 +49,6 @@
 }
 
 @media (min-width: 575px) {
-	.box-results {
-		width: 90%;
-	}
 }
 @media (max-height: 680px) and (min-width: 768px) {
 	.box-results {

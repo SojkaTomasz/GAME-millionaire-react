@@ -40,7 +40,6 @@
 }
 
 .list-top-results {
-	overflow-x: scroll;
 	width: 100%;
 	font-size: 1.6rem;
 	border: 1px solid black;

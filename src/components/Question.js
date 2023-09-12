@@ -94,12 +94,11 @@ function Question() {
 	if (!actualQuestion) return null
 
 	return (
-		<div className='box-question'>
+		<>
 			{finishGame ? (
 				<FinishGame />
 			) : (
-				<>
-					{" "}
+				<div className='box-question'>
 					<p
 						className='question'
 						dangerouslySetInnerHTML={{ __html: actualQuestion.question }}
@@ -122,9 +121,9 @@ function Question() {
 							</button>
 						))}
 					</div>
-				</>
+				</div>
 			)}
-		</div>
+		</>
 	)
 }
 
