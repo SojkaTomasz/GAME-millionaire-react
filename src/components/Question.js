@@ -1,4 +1,5 @@
 import { useContext, useEffect, useReducer } from "react"
+import FinishGame from "./FinishGame"
 import { initialState, reducer } from "../Reducer/reducerState"
 import ResultsUserContext from "../context/resultsUserContext"
 import DifficultyContext from "../context/difficultyContext"
@@ -9,7 +10,8 @@ const URL = "https://opentdb.com/api.php?amount=50&type=multiple"
 
 function Question() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const { addPoints } = useContext(ResultsUserContext)
+	const { addPoints, finishGame, handleFinishGame } =
+		useContext(ResultsUserContext)
 	const { difficulty } = useContext(DifficultyContext)
 
 	const { allQuestions, actualQuestion, actualAnswers, showCorrectAnswers } =
@@ -31,7 +33,7 @@ function Question() {
 
 	useEffect(() => {
 		if (allQuestions) {
-				findQuestion()
+			findQuestion()
 		}
 	}, [allQuestions, difficulty])
 
@@ -84,6 +86,7 @@ function Question() {
 				)
 				dispatch({ type: "allQuestions", allQuestions: delateQuestion })
 			} else {
+				handleFinishGame()
 			}
 		}, 1000)
 	}
@@ -92,28 +95,35 @@ function Question() {
 
 	return (
 		<div className='box-question'>
-			<p
-				className='question'
-				dangerouslySetInnerHTML={{ __html: actualQuestion.question }}
-			></p>
-			<div className='box-answers'>
-				{actualAnswers.map(answer => (
-					<button
-						className={
-							showCorrectAnswers
-								? answer.correctAnswer
-									? "correct-answers"
-									: "incorrect-answers"
-								: ""
-						}
-						key={answer.answer}
-						onClick={() => clickAnswersHandle(answer.answer)}
-					>
-						<span style={{ color: "orange" }}>{answer.options}: </span>
-						<span dangerouslySetInnerHTML={{ __html: answer.answer }}></span>
-					</button>
-				))}
-			</div>
+			{finishGame ? (
+				<FinishGame />
+			) : (
+				<>
+					{" "}
+					<p
+						className='question'
+						dangerouslySetInnerHTML={{ __html: actualQuestion.question }}
+					></p>
+					<div className='box-answers'>
+						{actualAnswers.map(answer => (
+							<button
+								className={
+									showCorrectAnswers
+										? answer.correctAnswer
+											? "correct-answers"
+											: "incorrect-answers"
+										: ""
+								}
+								key={answer.answer}
+								onClick={() => clickAnswersHandle(answer.answer)}
+							>
+								<span style={{ color: "orange" }}>{answer.options}: </span>
+								<span dangerouslySetInnerHTML={{ __html: answer.answer }}></span>
+							</button>
+						))}
+					</div>
+				</>
+			)}
 		</div>
 	)
 }
