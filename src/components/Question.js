@@ -11,13 +11,18 @@ const URL = "https://opentdb.com/api.php?amount=50&type=multiple"
 
 function Question() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const { addPoints } = useContext(ResultsUserContext)
-	const { finishGame, handleFinishGame, handleWrongAnswer } =
+	const { addPoints, points } = useContext(ResultsUserContext)
+	const { finishGame, handleFinishGame, handleClickFinish, handleWrongAnswer } =
 		useContext(GameControlContext)
 	const { difficulty } = useContext(DifficultyContext)
 
-	const { allQuestions, actualQuestion, actualAnswers, showCorrectAnswers } =
-		state
+	const {
+		allQuestions,
+		actualQuestion,
+		actualAnswers,
+		showCorrectAnswers,
+		cashList,
+	} = state
 
 	useEffect(() => {
 		const getData = async () => {
@@ -80,16 +85,22 @@ function Question() {
 	const clickAnswersHandle = value => {
 		dispatch({ type: "showCorrectAnswers", showCorrectAnswers: true })
 		setTimeout(() => {
-			if (value === actualQuestion.correct_answer) {
-				addPoints()
-				const newArrowQuestions = [...allQuestions]
-				const delateQuestion = newArrowQuestions.filter(
-					item => item.question !== actualQuestion.question
-				)
-				dispatch({ type: "allQuestions", allQuestions: delateQuestion })
+			if (cashList.length !== points + 1) {
+				if (value === actualQuestion.correct_answer) {
+					addPoints()
+					const newArrowQuestions = [...allQuestions]
+					const delateQuestion = newArrowQuestions.filter(
+						item => item.question !== actualQuestion.question
+					)
+					dispatch({ type: "allQuestions", allQuestions: delateQuestion })
+				} else {
+					handleFinishGame()
+					handleWrongAnswer("Unfortunately, your answer was incorrect!")
+				}
 			} else {
+				addPoints()
 				handleFinishGame()
-				handleWrongAnswer("Unfortunately, your answer was incorrect!")
+				handleClickFinish("Congratulations, your results are below!")
 			}
 		}, 1000)
 	}
@@ -110,7 +121,7 @@ function Question() {
 						{actualAnswers.map(answer => (
 							<button
 								className={
-									!showCorrectAnswers
+									showCorrectAnswers
 										? answer.correctAnswer
 											? "correct-answers"
 											: "incorrect-answers"

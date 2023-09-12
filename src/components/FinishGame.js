@@ -1,8 +1,8 @@
 import { useContext, useReducer } from "react"
 import GameControlContext from "../context/gameControlContext"
 import ResultsUserContext from "../context/resultsUserContext"
-import "./styles/finishGame.css"
 import { initialState, reducer } from "../Reducer/reducerState"
+import "./styles/finishGame.css"
 
 function FinishGame() {
 	const { finishGameText } = useContext(GameControlContext)
@@ -31,6 +31,7 @@ function FinishGame() {
 								type='text'
 								value={state.userName}
 								onChange={e => dispatch({ type: "userName", userName: e.target.value })}
+								onKeyDown={e => e.key === "Enter" && handleUserName(state.userName)}
 								placeholder='Name'
 							/>
 							<div class='tooltip-game-control-buttons'>

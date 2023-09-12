@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer } from "react"
-import { initialState, reducer } from "../../Reducer/reducerCashList"
+import { initialState, reducer } from "../../Reducer/reducerState"
 import ResultsUserContext from "../../context/resultsUserContext"
 import DifficultyContext from "../../context/difficultyContext"
 import "../styles/results.css"

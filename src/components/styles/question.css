@@ -51,7 +51,7 @@
 	top: 50%;
 	left: 50%;
 	height: 3px;
-	width: 150%;
+	width: 100vw;
 	transform: translate(-50%, -50%);
 	background-color: #196298;
 	z-index: -10;
@@ -79,6 +79,15 @@
 	}
 	.box-answers button {
 		width: 50%;
+	}
+}
+@media (max-height: 680px) and (min-width: 768px) {
+	.question,
+	.box-answers {
+		width: 50%;
+	}
+	.box-question {
+		align-items: center;
 	}
 }
 @media (min-width: 768px) {
