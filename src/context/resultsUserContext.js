@@ -1,6 +1,8 @@
 import React from "react"
 
 const ResultsUserContext = React.createContext({
+	userName: "",
+	handleUserName: () => {},
 	points: 0,
 	addPoints: () => {},
 	date: "",

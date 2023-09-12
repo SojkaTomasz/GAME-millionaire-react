@@ -21,13 +21,13 @@ function App() {
 				handleFinishGame: () => {
 					dispatch({ type: "finishGame", finishGame: true })
 				},
-				handleWrongAnswer: (text) => {
+				handleWrongAnswer: text => {
 					dispatch({ type: "finishGameText", finishGameText: text })
 					dispatch({ type: "cashWin", cashWin: state.safeCash })
 					dispatch({ type: "date", date: new Date().toLocaleDateString() })
 					dispatch({ type: "wrongAnswer", wrongAnswer: true })
 				},
-				handleClickFinish: (text) => {
+				handleClickFinish: text => {
 					dispatch({ type: "finishGameText", finishGameText: text })
 					dispatch({ type: "cashWin", cashWin: state.cash })
 					dispatch({ type: "date", date: new Date().toLocaleDateString() })
@@ -45,11 +45,15 @@ function App() {
 			>
 				<ResultsUserContext.Provider
 					value={{
+						userName: state.userName,
 						points: state.points,
 						date: state.date,
 						cash: state.cash,
 						safeCash: state.safeCash,
 						cashWin: state.cashWin,
+						handleUserName: name => {
+							dispatch({ type: "userName", userName: name })
+						},
 						addPoints: () => {
 							dispatch({ type: "points", points: state.points + 1 })
 						},

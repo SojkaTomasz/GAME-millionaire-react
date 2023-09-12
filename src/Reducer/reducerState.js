@@ -10,13 +10,13 @@ export const initialState = {
 	finishGameText: "",
 	wrongAnswer: false,
 	clickFinish: false,
-	
-	date: '',
+
+	userName: "",
+	points: 0,
+	date: "",
 	cash: "0 $",
 	safeCash: "0 $",
 	cashWin: "0 $",
-
-	points: 0,
 }
 
 export const reducer = (state, action) => {
@@ -42,6 +42,10 @@ export const reducer = (state, action) => {
 		case "clickFinish":
 			return { ...state, clickFinish: action.clickFinish }
 
+		case "userName":
+			return { ...state, userName: action.userName }
+		case "points":
+			return { ...state, points: action.points }
 		case "date":
 			return { ...state, date: action.date }
 		case "cash":
@@ -50,9 +54,6 @@ export const reducer = (state, action) => {
 			return { ...state, safeCash: action.safeCash }
 		case "cashWin":
 			return { ...state, cashWin: action.cashWin }
-
-		case "points":
-			return { ...state, points: action.points }
 
 		default:
 			throw new Error(action.type)

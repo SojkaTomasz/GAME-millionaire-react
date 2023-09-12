@@ -110,7 +110,7 @@ function Question() {
 						{actualAnswers.map(answer => (
 							<button
 								className={
-									showCorrectAnswers
+									!showCorrectAnswers
 										? answer.correctAnswer
 											? "correct-answers"
 											: "incorrect-answers"
