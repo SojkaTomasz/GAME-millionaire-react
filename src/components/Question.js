@@ -12,7 +12,8 @@ function Question() {
 	const { addPoints } = useContext(ResultsUserContext)
 	const { difficulty } = useContext(DifficultyContext)
 
-	const { allQuestions, actualQuestion, actualAnswers } = state
+	const { allQuestions, actualQuestion, actualAnswers, showCorrectAnswers } =
+		state
 
 	useEffect(() => {
 		const getData = async () => {
@@ -30,7 +31,7 @@ function Question() {
 
 	useEffect(() => {
 		if (allQuestions) {
-			findQuestion()
+				findQuestion()
 		}
 	}, [allQuestions, difficulty])
 
@@ -50,37 +51,41 @@ function Question() {
 			}
 		}
 
-		const answers = []
-		answers.push(...findQuestion.incorrect_answers, findQuestion.correct_answer)
-
-		const mixedAnswers = []
-		for (const key in answers) {
-			mixedAnswers.push(answers[index[key]])
-		}
-
+		const answers = [...findQuestion.incorrect_answers, findQuestion.correct_answer]
+		const correctAnswer = [false, false, false, true]
 		const options = ["A", "B", "C", "D"]
 
+		const answerAndCorrect = answers.map((answer, index) => ({
+			answers: answer,
+			correctAnswer: correctAnswer[index],
+		}))
+
 		const actualAnswers = []
-		for (let i = 0; i < 4; i++) {
+		for (const key in answerAndCorrect) {
 			actualAnswers.push({
-				options: options[i],
-				answers: mixedAnswers[i],
+				options: options[key],
+				answer: answers[index[key]],
+				correctAnswer: correctAnswer[index[key]],
 			})
 		}
 
+		dispatch({ type: "showCorrectAnswers", showCorrectAnswers: false })
 		dispatch({ type: "actualAnswers", actualAnswers: actualAnswers })
 	}
 
 	const clickAnswersHandle = value => {
-		if (value === actualQuestion.correct_answer) {
-			addPoints()
-			const newArrowQuestions = [...allQuestions]
-			const delateQuestion = newArrowQuestions.filter(
-				item => item.question !== actualQuestion.question
-			)
-			dispatch({ type: "allQuestions", allQuestions: delateQuestion })
-		} else {
-		}
+		dispatch({ type: "showCorrectAnswers", showCorrectAnswers: true })
+		setTimeout(() => {
+			if (value === actualQuestion.correct_answer) {
+				addPoints()
+				const newArrowQuestions = [...allQuestions]
+				const delateQuestion = newArrowQuestions.filter(
+					item => item.question !== actualQuestion.question
+				)
+				dispatch({ type: "allQuestions", allQuestions: delateQuestion })
+			} else {
+			}
+		}, 1000)
 	}
 
 	if (!actualQuestion) return null
@@ -92,13 +97,20 @@ function Question() {
 				dangerouslySetInnerHTML={{ __html: actualQuestion.question }}
 			></p>
 			<div className='box-answers'>
-				{actualAnswers.map(answers => (
+				{actualAnswers.map(answer => (
 					<button
-						key={answers.answers}
-						onClick={() => clickAnswersHandle(answers.answers)}
+						className={
+							showCorrectAnswers
+								? answer.correctAnswer
+									? "correct-answers"
+									: "incorrect-answers"
+								: ""
+						}
+						key={answer.answer}
+						onClick={() => clickAnswersHandle(answer.answer)}
 					>
-						<span style={{ color: "orange" }}>{answers.options}: </span>
-						<span dangerouslySetInnerHTML={{ __html: answers.answers }}></span>
+						<span style={{ color: "orange" }}>{answer.options}: </span>
+						<span dangerouslySetInnerHTML={{ __html: answer.answer }}></span>
 					</button>
 				))}
 			</div>

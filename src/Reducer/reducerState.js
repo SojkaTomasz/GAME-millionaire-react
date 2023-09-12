@@ -4,6 +4,8 @@ export const initialState = {
 	actualAnswers: null,
 	difficulty: "easy",
 
+	showCorrectAnswers: false,
+
 	cash: "0 $",
 	safeCash: "0 $",
 
@@ -20,6 +22,9 @@ export const reducer = (state, action) => {
 			return { ...state, actualAnswers: action.actualAnswers }
 		case "difficulty":
 			return { ...state, difficulty: action.difficulty }
+
+		case "showCorrectAnswers":
+			return { ...state, showCorrectAnswers: action.showCorrectAnswers }
 
 		case "cash":
 			return { ...state, cash: action.cash }
