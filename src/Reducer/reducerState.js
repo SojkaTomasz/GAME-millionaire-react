@@ -10,9 +10,11 @@ export const initialState = {
 	finishGameText: "",
 	wrongAnswer: false,
 	clickFinish: false,
-
+	
+	date: '',
 	cash: "0 $",
 	safeCash: "0 $",
+	cashWin: "0 $",
 
 	points: 0,
 }
@@ -40,10 +42,14 @@ export const reducer = (state, action) => {
 		case "clickFinish":
 			return { ...state, clickFinish: action.clickFinish }
 
+		case "date":
+			return { ...state, date: action.date }
 		case "cash":
 			return { ...state, cash: action.cash }
 		case "safeCash":
 			return { ...state, safeCash: action.safeCash }
+		case "cashWin":
+			return { ...state, cashWin: action.cashWin }
 
 		case "points":
 			return { ...state, points: action.points }

@@ -21,8 +21,18 @@ function App() {
 				handleFinishGame: () => {
 					dispatch({ type: "finishGame", finishGame: true })
 				},
-				handleWrongAnswer: () => {},
-				handleClickFinish: () => {},
+				handleWrongAnswer: (text) => {
+					dispatch({ type: "finishGameText", finishGameText: text })
+					dispatch({ type: "cashWin", cashWin: state.safeCash })
+					dispatch({ type: "date", date: new Date().toLocaleDateString() })
+					dispatch({ type: "wrongAnswer", wrongAnswer: true })
+				},
+				handleClickFinish: (text) => {
+					dispatch({ type: "finishGameText", finishGameText: text })
+					dispatch({ type: "cashWin", cashWin: state.cash })
+					dispatch({ type: "date", date: new Date().toLocaleDateString() })
+					dispatch({ type: "clickFinish", clickFinish: true })
+				},
 			}}
 		>
 			<DifficultyContext.Provider
@@ -36,8 +46,10 @@ function App() {
 				<ResultsUserContext.Provider
 					value={{
 						points: state.points,
+						date: state.date,
 						cash: state.cash,
 						safeCash: state.safeCash,
+						cashWin: state.cashWin,
 						addPoints: () => {
 							dispatch({ type: "points", points: state.points + 1 })
 						},
