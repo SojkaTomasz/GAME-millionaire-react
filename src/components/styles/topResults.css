@@ -16,7 +16,7 @@
 }
 
 .animation-btn-top-results {
-	left: calc(100% - (156px));
+	left: calc(100% - (185px));
 }
 
 .box-top-results {
@@ -36,6 +36,11 @@
 }
 .animation-box-top-results {
 	top: 0;
+}
+
+.box-top-results p {
+	text-align: center;
+	color: white;
 }
 
 .list-top-results {
