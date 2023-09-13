@@ -19,6 +19,7 @@ function App() {
 				clickFinish: state.clickFinish,
 				difficulty: state.difficulty,
 				actualAnswers: state.actualAnswers,
+				btnHelpList: state.btnHelpList,
 				handleFinishGame: () => {
 					dispatch({ type: "finishGame", finishGame: true })
 				},
@@ -37,6 +38,9 @@ function App() {
 				},
 				handleActualAnswers: answers => {
 					dispatch({ type: "actualAnswers", actualAnswers: answers })
+				},
+				handleBtnHelpList: list => {
+					dispatch({ type: "btnHelpList", btnHelpList: list })
 				},
 			}}
 		>

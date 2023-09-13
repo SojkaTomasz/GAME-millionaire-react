@@ -18,6 +18,22 @@ export const initialState = {
 	safeCash: "0 $",
 	cashWin: "0 $",
 
+	btnHelpList: [
+		{ id: 1, text: "50:50", className: "help-buttons", active: true },
+		{
+			id: 2,
+			text: <i className='fa-solid fa-phone-flip'></i>,
+			className: "help-buttons",
+			active: true,
+		},
+		{
+			id: 3,
+			text: <i className='fa-solid fa-users'></i>,
+			className: "help-buttons",
+			active: true,
+		},
+	],
+
 	cashList: [
 		{
 			number: 1,
@@ -162,6 +178,9 @@ export const reducer = (state, action) => {
 			return { ...state, safeCash: action.safeCash }
 		case "cashWin":
 			return { ...state, cashWin: action.cashWin }
+
+		case "btnHelpList":
+			return { ...state, btnHelpList: action.btnHelpList }
 
 		case "cashList":
 			return { ...state, cashList: action.cashList }

@@ -1,28 +1,29 @@
-import '../styles/helpButtons.css'
+import { useContext, useEffect, useReducer } from "react"
+import "../styles/helpButtons.css"
+import { initialState, reducer } from "../../Reducer/reducerState"
+import GameControlContext from "../../context/gameControlContext"
 
 function HelpButtons() {
-	const btnHelp = [
-		{ id: 1, text: "50:50", className: "help-buttons", active: false },
-		{
-			id: 2,
-			text: <i className='fa-solid fa-phone-flip'></i>,
-			className: "help-buttons",
-			active: true,
-		},
-		{
-			id: 3,
-			text: <i className='fa-solid fa-users'></i>,
-			className: "help-buttons",
-			active: false,
-		},
-	]
+	const [state, dispatch] = useReducer(reducer, initialState)
+	const { handleBtnHelpList } = useContext(GameControlContext)
+
+	const handleClickBtnHelp = id => {
+		const newBtnHelpList = [...state.btnHelpList].map(item => {
+			if (item.id === id) {
+				item.active = false
+			}
+			return item
+		})
+		handleBtnHelpList(newBtnHelpList)
+	}
 
 	return (
 		<div>
-			{btnHelp.map(item => (
+			{state.btnHelpList.map(item => (
 				<button
 					key={item.id}
-					className={`${item.className} ${item.active && "used-help-buttons"}`}
+					className={`${item.className} ${!item.active && "used-help-buttons"}`}
+					onClick={() => handleClickBtnHelp(item.id)}
 				>
 					{item.text}
 				</button>

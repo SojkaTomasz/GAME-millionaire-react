@@ -20,6 +20,12 @@
 	transform: scale(1.05);
 }
 
+.used-help-buttons {
+	pointer-events: none;
+	border: none;
+	color: gray;
+}
+
 .used-help-buttons::before {
 	content: "";
 	position: absolute;
