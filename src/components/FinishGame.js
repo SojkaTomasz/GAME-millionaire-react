@@ -11,7 +11,7 @@ function FinishGame() {
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	return (
-		<div className='box-finish-game'>
+		<div id="finish-game" className='box-finish-game'>
 			{cashWin === "0 $" ? (
 				<div>
 					<h2>Your result</h2>

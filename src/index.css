@@ -6,13 +6,19 @@
 
 html {
 	font-size: 62.5%;
+	scroll-behavior: smooth;
 }
 
 p,
 span,
 button,
+a,
 table {
 	font-size: 2rem;
+}
+
+a{
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {

@@ -4,9 +4,11 @@
 	margin: 5px;
 }
 
+.game-control-buttons,
 .tooltip-game-control-buttons button {
 	padding: 5px 10px;
 	border: 1px solid black;
+	text-decoration: none;
 	border-radius: 10px;
 	color: white;
 	text-transform: uppercase;
