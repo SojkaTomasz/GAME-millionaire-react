@@ -1,16 +1,33 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { firebaseConfig } from "../firebase"
+import axios from "axios"
 import "./styles/topResults.css"
 
+const HTTPS_URL = `${firebaseConfig.databaseURL}/top-results.json`
+
 function TopResults() {
-	const [toggleshow, setToggleShow] = useState(false)
+	const [toggleShow, setToggleShow] = useState(false)
+	const [dataUsersResults, setDataUsersResults] = useState()
+
+	useEffect(() => {
+		const getDataUsersResults = async () => {
+			const res = await axios.get(HTTPS_URL)
+			let allDataUsersResults = []
+			for (const key in res.data) {
+				allDataUsersResults.push({ ...res.data[key], id: key })
+			}
+			setDataUsersResults(allDataUsersResults)
+		}
+		getDataUsersResults()
+	}, [])
 
 	return (
 		<>
 			<button
-				onClick={() => setToggleShow(!toggleshow)}
-				className={`btn-top-results ${toggleshow && "animation-btn-top-results"}`}
+				onClick={() => setToggleShow(!toggleShow)}
+				className={`btn-top-results ${toggleShow && "animation-btn-top-results"}`}
 			>
-				{toggleshow ? (
+				{toggleShow ? (
 					<>
 						<i className='fa-solid fa-arrow-up'></i> Top Results
 					</>
@@ -20,7 +37,7 @@ function TopResults() {
 					</>
 				)}
 			</button>
-			<div className={`box-top-results ${toggleshow && "animation-box-top-results"}`}>
+			<div className={`box-top-results ${toggleShow && "animation-box-top-results"}`}>
 				<table className='list-top-results'>
 					<thead>
 						<tr>
@@ -30,45 +47,17 @@ function TopResults() {
 							<th>Cash</th>
 						</tr>
 					</thead>
-					<tbody>
-
-						<tr>
-							<th>1</th>
-							<th>Piotr</th>
-							<th>9/11/2023</th>
-							<th>1 000 000 $</th>
-						</tr>
-						<tr>
-							<th>2</th>
-							<th>Kamila</th>
-							<th>9/11/2023</th>
-							<th>1 000 000 $</th>
-						</tr>
-						<tr>
-							<th>3</th>
-							<th>Dawid</th>
-							<th>9/11/2023</th>
-							<th>500 000 $</th>
-						</tr>
-						<tr>
-							<th>4</th>
-							<th>Józef</th>
-							<th>9/11/2023</th>
-							<th>500 000 $</th>
-						</tr>
-						<tr>
-							<th>5</th>
-							<th>Tomek</th>
-							<th>9/11/2023</th>
-							<th>250 000 $</th>
-						</tr>
-						<tr>
-							<th>6</th>
-							<th>Marta</th>
-							<th>9/11/2023</th>
-							<th>250 000 $</th>
-						</tr>
-					</tbody>
+					{dataUsersResults &&
+						dataUsersResults.map(item => (
+							<tbody>
+								<tr>
+									<th>1</th>
+									<th>{item.userName}</th>
+									<th>{item.date}</th>
+									<th>{item.cashWin}</th>
+								</tr>
+							</tbody>
+						))}
 				</table>
 			</div>
 		</>
