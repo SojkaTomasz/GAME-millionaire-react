@@ -8,6 +8,10 @@ const GameControlContext = React.createContext({
 	handleWrongAnswer: () => {},
 	clickFinish: false,
 	handleClickFinish: () => {},
+	difficulty: "",
+	changeDifficulty: () => {},
+	actualAnswers: null,
+	handleActualAnswers: () => {},
 })
 
 GameControlContext.displayName = "GameControlContext"

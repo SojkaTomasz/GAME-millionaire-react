@@ -12,16 +12,16 @@ function Question() {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const { addPoints, points, addCashWin, safeCash } =
 		useContext(ResultsUserContext)
-	const { finishGame, handleFinishGame, handleWrongAnswer, difficulty } =
-		useContext(GameControlContext)
-
 	const {
-		allQuestions,
-		actualQuestion,
+		finishGame,
+		handleFinishGame,
+		handleWrongAnswer,
+		difficulty,
 		actualAnswers,
-		showCorrectAnswers,
-		cashList,
-	} = state
+		handleActualAnswers,
+	} = useContext(GameControlContext)
+
+	const { allQuestions, actualQuestion, showCorrectAnswers, cashList } = state
 
 	useEffect(() => {
 		const getData = async () => {
@@ -78,7 +78,7 @@ function Question() {
 		}
 
 		dispatch({ type: "showCorrectAnswers", showCorrectAnswers: false })
-		dispatch({ type: "actualAnswers", actualAnswers: actualAnswers })
+		handleActualAnswers(actualAnswers)
 	}
 
 	const clickAnswersHandle = value => {

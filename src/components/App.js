@@ -18,6 +18,7 @@ function App() {
 				wrongAnswer: state.wrongAnswer,
 				clickFinish: state.clickFinish,
 				difficulty: state.difficulty,
+				actualAnswers: state.actualAnswers,
 				handleFinishGame: () => {
 					dispatch({ type: "finishGame", finishGame: true })
 				},
@@ -34,42 +35,44 @@ function App() {
 				changeDifficulty: difficulty => {
 					dispatch({ type: "difficulty", difficulty: difficulty })
 				},
+				handleActualAnswers: answers => {
+					dispatch({ type: "actualAnswers", actualAnswers: answers })
+				},
 			}}
+		>
+			<ResultsUserContext.Provider
+				value={{
+					userName: state.userName,
+					points: state.points,
+					date: state.date,
+					cash: state.cash,
+					safeCash: state.safeCash,
+					cashWin: state.cashWin,
+					handleUserName: name => {
+						dispatch({ type: "userName", userName: name })
+					},
+					addPoints: () => {
+						dispatch({ type: "points", points: state.points + 1 })
+					},
+					addCash: cash => {
+						dispatch({ type: "cash", cash: cash })
+					},
+					addSafeCash: cash => {
+						dispatch({ type: "safeCash", safeCash: cash })
+					},
+					addCashWin: cash => {
+						dispatch({ type: "cashWin", cashWin: cash })
+					},
+				}}
 			>
-
-				<ResultsUserContext.Provider
-					value={{
-						userName: state.userName,
-						points: state.points,
-						date: state.date,
-						cash: state.cash,
-						safeCash: state.safeCash,
-						cashWin: state.cashWin,
-						handleUserName: name => {
-							dispatch({ type: "userName", userName: name })
-						},
-						addPoints: () => {
-							dispatch({ type: "points", points: state.points + 1 })
-						},
-						addCash: cash => {
-							dispatch({ type: "cash", cash: cash })
-						},
-						addSafeCash: cash => {
-							dispatch({ type: "safeCash", safeCash: cash })
-						},
-						addCashWin: cash => {
-							dispatch({ type: "cashWin", cashWin: cash })
-						},
-					}}
-				>
-					<div className='box-app'>
-						<TopResults />
-						<div className='background-question'>
-							<Question />
-						</div>
-						<SidePanel />
+				<div className='box-app'>
+					<TopResults />
+					<div className='background-question'>
+						<Question />
 					</div>
-				</ResultsUserContext.Provider>
+					<SidePanel />
+				</div>
+			</ResultsUserContext.Provider>
 		</GameControlContext.Provider>
 	)
 }
