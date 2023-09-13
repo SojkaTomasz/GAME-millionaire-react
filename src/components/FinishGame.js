@@ -1,8 +1,12 @@
-import { useContext, useReducer } from "react"
+import { useContext, useEffect, useReducer } from "react"
 import GameControlContext from "../context/gameControlContext"
 import ResultsUserContext from "../context/resultsUserContext"
 import { initialState, reducer } from "../Reducer/reducerState"
+import { firebaseConfig } from "../firebase"
+import axios from "axios"
 import "./styles/finishGame.css"
+
+const HTTPS_URL = `${firebaseConfig.databaseURL}/top-results.json`
 
 function FinishGame() {
 	const { finishGameText } = useContext(GameControlContext)
@@ -10,8 +14,26 @@ function FinishGame() {
 		useContext(ResultsUserContext)
 	const [state, dispatch] = useReducer(reducer, initialState)
 
+	useEffect(() => {
+		if (userName && date && cashWin) {
+			postTopResults()
+		}
+	}, [userName, date, cashWin])
+
+	const postTopResults = async () => {
+		try {
+			await axios.post(HTTPS_URL, {
+				userName,
+				date,
+				cashWin,
+			})
+		} catch (ex) {
+			console.log(ex.response)
+		}
+	}
+
 	return (
-		<div id="finish-game" className='box-finish-game'>
+		<div id='finish-game' className='box-finish-game'>
 			{cashWin === "0 $" ? (
 				<div>
 					<h2>Your result</h2>
