@@ -2,7 +2,6 @@ import SidePanel from "./SidePanel"
 import Question from "./Question"
 import TopResults from "./TopResults"
 import ResultsUserContext from "../context/resultsUserContext"
-import DifficultyContext from "../context/difficultyContext"
 import GameControlContext from "../context/gameControlContext"
 import "./styles/app.css"
 import { reducer, initialState } from "../Reducer/reducerState"
@@ -18,6 +17,7 @@ function App() {
 				finishGameText: state.finishGameText,
 				wrongAnswer: state.wrongAnswer,
 				clickFinish: state.clickFinish,
+				difficulty: state.difficulty,
 				handleFinishGame: () => {
 					dispatch({ type: "finishGame", finishGame: true })
 				},
@@ -31,16 +31,12 @@ function App() {
 					dispatch({ type: "date", date: new Date().toLocaleDateString() })
 					dispatch({ type: "clickFinish", clickFinish: true })
 				},
+				changeDifficulty: difficulty => {
+					dispatch({ type: "difficulty", difficulty: difficulty })
+				},
 			}}
-		>
-			<DifficultyContext.Provider
-				value={{
-					difficulty: state.difficulty,
-					changeDifficulty: difficulty => {
-						dispatch({ type: "difficulty", difficulty: difficulty })
-					},
-				}}
 			>
+
 				<ResultsUserContext.Provider
 					value={{
 						userName: state.userName,
@@ -74,7 +70,6 @@ function App() {
 						<SidePanel />
 					</div>
 				</ResultsUserContext.Provider>
-			</DifficultyContext.Provider>
 		</GameControlContext.Provider>
 	)
 }

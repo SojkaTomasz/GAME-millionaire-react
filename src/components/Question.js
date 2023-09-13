@@ -2,7 +2,6 @@ import { useContext, useEffect, useReducer } from "react"
 import FinishGame from "./FinishGame"
 import { initialState, reducer } from "../Reducer/reducerState"
 import ResultsUserContext from "../context/resultsUserContext"
-import DifficultyContext from "../context/difficultyContext"
 import GameControlContext from "../context/gameControlContext"
 import axios from "axios"
 import "./styles/question.css"
@@ -13,9 +12,8 @@ function Question() {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const { addPoints, points, addCashWin, safeCash } =
 		useContext(ResultsUserContext)
-	const { finishGame, handleFinishGame, handleWrongAnswer } =
+	const { finishGame, handleFinishGame, handleWrongAnswer, difficulty } =
 		useContext(GameControlContext)
-	const { difficulty } = useContext(DifficultyContext)
 
 	const {
 		allQuestions,
@@ -100,7 +98,7 @@ function Question() {
 				handleWrongAnswer("Unfortunately, your answer was incorrect!")
 				addCashWin(safeCash)
 			}
-		}, 10)
+		}, 1000)
 	}
 
 	if (!actualQuestion) return null
@@ -119,7 +117,7 @@ function Question() {
 						{actualAnswers.map(answer => (
 							<button
 								className={
-									showCorrectAnswers
+									!showCorrectAnswers
 										? answer.correctAnswer
 											? "correct-answers"
 											: "incorrect-answers"
