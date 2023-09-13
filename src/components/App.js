@@ -23,13 +23,11 @@ function App() {
 				},
 				handleWrongAnswer: text => {
 					dispatch({ type: "finishGameText", finishGameText: text })
-					dispatch({ type: "cashWin", cashWin: state.safeCash })
 					dispatch({ type: "date", date: new Date().toLocaleDateString() })
 					dispatch({ type: "wrongAnswer", wrongAnswer: true })
 				},
 				handleClickFinish: text => {
 					dispatch({ type: "finishGameText", finishGameText: text })
-					dispatch({ type: "cashWin", cashWin: state.cash })
 					dispatch({ type: "date", date: new Date().toLocaleDateString() })
 					dispatch({ type: "clickFinish", clickFinish: true })
 				},
@@ -62,6 +60,9 @@ function App() {
 						},
 						addSafeCash: cash => {
 							dispatch({ type: "safeCash", safeCash: cash })
+						},
+						addCashWin: cash => {
+							dispatch({ type: "cashWin", cashWin: cash })
 						},
 					}}
 				>

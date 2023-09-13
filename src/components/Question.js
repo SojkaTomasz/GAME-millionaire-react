@@ -11,8 +11,9 @@ const URL = "https://opentdb.com/api.php?amount=50&type=multiple"
 
 function Question() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const { addPoints, points } = useContext(ResultsUserContext)
-	const { finishGame, handleFinishGame, handleClickFinish, handleWrongAnswer } =
+	const { addPoints, points, addCashWin, safeCash } =
+		useContext(ResultsUserContext)
+	const { finishGame, handleFinishGame, handleWrongAnswer } =
 		useContext(GameControlContext)
 	const { difficulty } = useContext(DifficultyContext)
 
@@ -85,24 +86,21 @@ function Question() {
 	const clickAnswersHandle = value => {
 		dispatch({ type: "showCorrectAnswers", showCorrectAnswers: true })
 		setTimeout(() => {
-			if (cashList.length !== points + 1) {
-				if (value === actualQuestion.correct_answer) {
-					addPoints()
+			if (value === actualQuestion.correct_answer) {
+				addPoints()
+				if (cashList.length !== points) {
 					const newArrowQuestions = [...allQuestions]
 					const delateQuestion = newArrowQuestions.filter(
 						item => item.question !== actualQuestion.question
 					)
 					dispatch({ type: "allQuestions", allQuestions: delateQuestion })
-				} else {
-					handleFinishGame()
-					handleWrongAnswer("Unfortunately, your answer was incorrect!")
 				}
 			} else {
-				addPoints()
 				handleFinishGame()
-				handleClickFinish("Congratulations, your results are below!")
+				handleWrongAnswer("Unfortunately, your answer was incorrect!")
+				addCashWin(safeCash)
 			}
-		}, 1000)
+		}, 10)
 	}
 
 	if (!actualQuestion) return null

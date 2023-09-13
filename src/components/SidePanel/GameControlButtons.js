@@ -5,7 +5,8 @@ import "../styles/gameControlButtons.css"
 
 function GameControlButtons() {
 	const { handleClickFinish, handleFinishGame } = useContext(GameControlContext)
-	const { points } = useContext(ResultsUserContext)
+	const { addCashWin } = useContext(ResultsUserContext)
+	const { points, cash } = useContext(ResultsUserContext)
 
 	return (
 		<div className='box-game-control-buttons'>
@@ -24,6 +25,7 @@ function GameControlButtons() {
 						onClick={() => {
 							handleClickFinish("Congratulations, your results are below!")
 							handleFinishGame()
+							addCashWin(cash)
 						}}
 						className='game-control-buttons'
 						href='#finish-game'

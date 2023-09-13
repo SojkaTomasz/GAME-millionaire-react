@@ -2,11 +2,14 @@ import { useContext, useEffect, useReducer } from "react"
 import { initialState, reducer } from "../../Reducer/reducerState"
 import ResultsUserContext from "../../context/resultsUserContext"
 import DifficultyContext from "../../context/difficultyContext"
+import GameControlContext from "../../context/gameControlContext"
 import "../styles/results.css"
 
 function Results() {
-	const { points, addCash, addSafeCash } = useContext(ResultsUserContext)
+	const { points, cash, addCash, addSafeCash, addCashWin } =
+		useContext(ResultsUserContext)
 	const { difficulty, changeDifficulty } = useContext(DifficultyContext)
+	const { handleFinishGame, handleClickFinish } = useContext(GameControlContext)
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const { cashList } = state
 
@@ -29,6 +32,14 @@ function Results() {
 		})
 		dispatch({ type: "cashList", cashList: newCashList })
 	}, [points])
+
+	useEffect(() => {
+		if (cashList.length === points) {
+			handleFinishGame()
+			handleClickFinish("Congratulations, your results are below!")
+			addCashWin(cash)
+		}
+	}, [cash])
 
 	return (
 		<ul className='box-results' type='number'>
