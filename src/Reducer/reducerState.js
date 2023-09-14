@@ -10,6 +10,9 @@ export const initialState = {
 	finishGameText: "",
 	wrongAnswer: false,
 	clickFinish: false,
+	usedHelpFiftyFifty: false,
+	usedHelpPhone: false,
+	answersHelpPhone: "",
 
 	userName: "",
 	points: 0,
@@ -165,6 +168,12 @@ export const reducer = (state, action) => {
 			return { ...state, wrongAnswer: action.wrongAnswer }
 		case "clickFinish":
 			return { ...state, clickFinish: action.clickFinish }
+		case "usedHelpFiftyFifty":
+			return { ...state, usedHelpFiftyFifty: action.usedHelpFiftyFifty }
+		case "usedHelpPhone":
+			return { ...state, usedHelpPhone: action.usedHelpPhone }
+		case "answersHelpPhone":
+			return { ...state, answersHelpPhone: action.answersHelpPhone }
 
 		case "userName":
 			return { ...state, userName: action.userName }

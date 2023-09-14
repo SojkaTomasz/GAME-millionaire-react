@@ -1,10 +1,18 @@
 import { useContext } from "react"
 import "../styles/helpButtons.css"
+
 import GameControlContext from "../../context/gameControlContext"
 
 function HelpButtons() {
-	const { actualAnswers, btnHelpList, handleBtnHelpList, handleActualAnswers } =
-		useContext(GameControlContext)
+	const {
+		actualAnswers,
+		btnHelpList,
+		handleBtnHelpList,
+		handleHelpFiftyFifty,
+		handleActualAnswers,
+		usedHelpFiftyFifty,
+		handleHelpPhone,
+	} = useContext(GameControlContext)
 
 	const handleClickBtnHelp = (id, name) => {
 		const newBtnHelpList = [...btnHelpList].map(item => {
@@ -15,6 +23,7 @@ function HelpButtons() {
 		})
 		handleBtnHelpList(newBtnHelpList)
 		if (name === "fifty fifty") {
+			handleHelpFiftyFifty(true)
 			helpFiftyFifty()
 		} else if (name === "phone") {
 			helpPhone()
@@ -25,32 +34,50 @@ function HelpButtons() {
 
 	const helpFiftyFifty = () => {
 		let removedCount = 0
-		const nawActualAnswers = [...actualAnswers].filter(item => {
-			if (removedCount < 2 && item.correctAnswer === false) {
+		const nawActualAnswers = [...actualAnswers].filter(answer => {
+			if (removedCount < 2 && answer.correctAnswer === false) {
 				removedCount++
-				return item.correctAnswer !== false
+				return answer.correctAnswer !== false
 			}
-			return item
+			return answer
 		})
 		handleActualAnswers(nawActualAnswers)
 	}
 	const helpPhone = () => {
-		console.log("helpPhone")
+		const percentEffective = Math.floor(Math.random() * actualAnswers.length)
+		if (percentEffective < actualAnswers.length - 1) {
+			const answerHelpPhone = [...actualAnswers].filter(
+				answer => answer.correctAnswer === true
+			)
+			handleHelpPhone(true, answerHelpPhone[answerHelpPhone.length - 1].options)
+		} else {
+			const answerHelpPhone = [...actualAnswers].filter(
+				answer => answer.correctAnswer !== true
+			)
+			let percentEffective = Math.floor(Math.random() * answerHelpPhone.length)
+			if (usedHelpFiftyFifty) {
+				percentEffective = 0
+			}
+			handleHelpPhone(true, answerHelpPhone[percentEffective].options)
+		}
 	}
 	const helpUser = () => {
 		console.log("helpUser")
 	}
 
+	if (!actualAnswers) return null
+
 	return (
-		<div>
+		<div className="box-help-buttons">
 			{btnHelpList.map(item => (
-				<button
+				<a
 					key={item.id}
 					className={`help-buttons ${!item.active && "used-help-buttons"}`}
 					onClick={() => handleClickBtnHelp(item.id, item.name)}
+					href='#help'
 				>
 					{item.text}
-				</button>
+				</a>
 			))}
 		</div>
 	)

@@ -19,6 +19,8 @@ function Question() {
 		difficulty,
 		actualAnswers,
 		handleActualAnswers,
+		handleHelpPhone,
+		usedHelpPhone,
 	} = useContext(GameControlContext)
 
 	const { allQuestions, actualQuestion, showCorrectAnswers, cashList } = state
@@ -83,6 +85,9 @@ function Question() {
 
 	const clickAnswersHandle = value => {
 		dispatch({ type: "showCorrectAnswers", showCorrectAnswers: true })
+		if (usedHelpPhone) {
+			handleHelpPhone(false, "")
+		}
 		setTimeout(() => {
 			if (value === actualQuestion.correct_answer) {
 				addPoints()
@@ -108,7 +113,7 @@ function Question() {
 			{finishGame ? (
 				<FinishGame />
 			) : (
-				<div className='box-question'>
+				<div id='help' className='box-question'>
 					<p
 						className='question'
 						dangerouslySetInnerHTML={{ __html: actualQuestion.question }}

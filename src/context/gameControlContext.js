@@ -14,6 +14,11 @@ const GameControlContext = React.createContext({
 	handleActualAnswers: () => {},
 	btnHelpList: null,
 	handleBtnHelpList: () => {},
+	usedHelpFiftyFifty: false,
+	handleHelpFiftyFifty: () => {},
+	usedHelpPhone: false,
+	answersHelpPhone: "",
+	handleHelpPhone: () => {},
 })
 
 GameControlContext.displayName = "GameControlContext"

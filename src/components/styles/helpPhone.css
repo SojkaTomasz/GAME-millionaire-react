@@ -1,0 +1,47 @@
+.box-help-phone {
+	position: relative;
+	padding-top: 40px;
+	margin: 0 20px -20px;
+	z-index: 1;
+}
+.box-help-phone > div {
+	padding: 20px;
+	text-align: center;
+	background: radial-gradient(
+		ellipse,
+		rgba(126, 47, 175, 0.8) 10%,
+		rgba(32, 24, 37, 0.8) 90%
+	);
+	color: white;
+}
+.box-help-phone > div > h2 {
+	margin-bottom: 10px;
+}
+
+.box-help-phone img {
+	border: 8px solid white;
+	width: 70%;
+}
+
+.box-help-phone div p {
+	font-weight: bold;
+	color: orange;
+	margin-top: 10px;
+	font-size: 3rem;
+}
+
+@media (min-width: 575px) {
+	.box-help-phone img {
+		width: 55%;
+	}
+}
+@media (min-width: 768px) {
+	.box-help-phone img {
+		width: 45%;
+	}
+}
+@media (min-width: 992px) {
+	.box-help-phone img {
+		width: 25%;
+	}
+}

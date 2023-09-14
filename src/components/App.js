@@ -1,11 +1,12 @@
+import { useReducer } from "react"
+import { reducer, initialState } from "../Reducer/reducerState"
+import ResultsUserContext from "../context/resultsUserContext"
+import GameControlContext from "../context/gameControlContext"
 import SidePanel from "./SidePanel"
 import Question from "./Question"
 import TopResults from "./TopResults"
-import ResultsUserContext from "../context/resultsUserContext"
-import GameControlContext from "../context/gameControlContext"
+import HelpPhone from "./HelpButtons/HelpPhone"
 import "./styles/app.css"
-import { reducer, initialState } from "../Reducer/reducerState"
-import { useReducer } from "react"
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState)
@@ -20,6 +21,9 @@ function App() {
 				difficulty: state.difficulty,
 				actualAnswers: state.actualAnswers,
 				btnHelpList: state.btnHelpList,
+				usedHelpFiftyFifty: state.usedHelpFiftyFifty,
+				usedHelpPhone: state.usedHelpPhone,
+				answersHelpPhone: state.answersHelpPhone,
 				handleFinishGame: () => {
 					dispatch({ type: "finishGame", finishGame: true })
 				},
@@ -41,6 +45,13 @@ function App() {
 				},
 				handleBtnHelpList: list => {
 					dispatch({ type: "btnHelpList", btnHelpList: list })
+				},
+				handleHelpFiftyFifty: boolean => {
+					dispatch({ type: "usedHelpFiftyFifty", usedHelpFiftyFifty: boolean })
+				},
+				handleHelpPhone: (boolean, answers) => {
+					dispatch({ type: "usedHelpPhone", usedHelpPhone: boolean })
+					dispatch({ type: "answersHelpPhone", answersHelpPhone: answers })
 				},
 			}}
 		>
@@ -72,6 +83,7 @@ function App() {
 				<div className='box-app'>
 					<TopResults />
 					<div className='background-question'>
+						{state.usedHelpPhone && <HelpPhone />}
 						<Question />
 					</div>
 					<SidePanel />
