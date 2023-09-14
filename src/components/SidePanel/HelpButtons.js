@@ -1,29 +1,53 @@
-import { useContext, useEffect, useReducer } from "react"
+import { useContext } from "react"
 import "../styles/helpButtons.css"
-import { initialState, reducer } from "../../Reducer/reducerState"
 import GameControlContext from "../../context/gameControlContext"
 
 function HelpButtons() {
-	const [state, dispatch] = useReducer(reducer, initialState)
-	const { handleBtnHelpList } = useContext(GameControlContext)
+	const { actualAnswers, btnHelpList, handleBtnHelpList, handleActualAnswers } =
+		useContext(GameControlContext)
 
-	const handleClickBtnHelp = id => {
-		const newBtnHelpList = [...state.btnHelpList].map(item => {
+	const handleClickBtnHelp = (id, name) => {
+		const newBtnHelpList = [...btnHelpList].map(item => {
 			if (item.id === id) {
 				item.active = false
 			}
 			return item
 		})
 		handleBtnHelpList(newBtnHelpList)
+		if (name === "fifty fifty") {
+			helpFiftyFifty()
+		} else if (name === "phone") {
+			helpPhone()
+		} else {
+			helpUser()
+		}
+	}
+
+	const helpFiftyFifty = () => {
+		let removedCount = 0
+		const nawActualAnswers = [...actualAnswers].filter(item => {
+			if (removedCount < 2 && item.correctAnswer === false) {
+				removedCount++
+				return item.correctAnswer !== false
+			}
+			return item
+		})
+		handleActualAnswers(nawActualAnswers)
+	}
+	const helpPhone = () => {
+		console.log("helpPhone")
+	}
+	const helpUser = () => {
+		console.log("helpUser")
 	}
 
 	return (
 		<div>
-			{state.btnHelpList.map(item => (
+			{btnHelpList.map(item => (
 				<button
 					key={item.id}
-					className={`${item.className} ${!item.active && "used-help-buttons"}`}
-					onClick={() => handleClickBtnHelp(item.id)}
+					className={`help-buttons ${!item.active && "used-help-buttons"}`}
+					onClick={() => handleClickBtnHelp(item.id, item.name)}
 				>
 					{item.text}
 				</button>

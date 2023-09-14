@@ -10,17 +10,17 @@ function GameControlButtons() {
 
 	return (
 		<div className='box-game-control-buttons'>
-			<div class='tooltip-game-control-buttons'>
+			<div className='tooltip-game-control-buttons'>
 				<button
 					className='game-control-buttons'
 					onClick={() => window.location.reload()}
 				>
 					Restart
 				</button>
-				<span class='tooltip-text-game-control-buttons'>Start the game again!</span>
+				<span className='tooltip-text-game-control-buttons'>Start the game again!</span>
 			</div>
 			{points ? (
-				<div class='tooltip-game-control-buttons'>
+				<div className='tooltip-game-control-buttons'>
 					<a
 						onClick={() => {
 							handleClickFinish("Congratulations, your results are below!")
@@ -32,7 +32,7 @@ function GameControlButtons() {
 					>
 						Finish
 					</a>
-					<span class='tooltip-text-game-control-buttons'>
+					<span className='tooltip-text-game-control-buttons'>
 						Finish at this stage and get your winnings!
 					</span>
 				</div>

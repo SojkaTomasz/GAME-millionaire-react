@@ -19,17 +19,17 @@ export const initialState = {
 	cashWin: "0 $",
 
 	btnHelpList: [
-		{ id: 1, text: "50:50", className: "help-buttons", active: true },
+		{ id: 1, text: "50:50", name: "fifty fifty", active: true },
 		{
 			id: 2,
 			text: <i className='fa-solid fa-phone-flip'></i>,
-			className: "help-buttons",
+			name: "phone",
 			active: true,
 		},
 		{
 			id: 3,
 			text: <i className='fa-solid fa-users'></i>,
-			className: "help-buttons",
+			name: "users",
 			active: true,
 		},
 	],
