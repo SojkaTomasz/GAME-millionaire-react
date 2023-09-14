@@ -86,7 +86,9 @@ function Question() {
 	const clickAnswersHandle = value => {
 		dispatch({ type: "showCorrectAnswers", showCorrectAnswers: true })
 		if (usedHelpPhone) {
-			handleHelpPhone(false, "")
+			setTimeout(() => {
+				handleHelpPhone(false, "")
+			}, 1000);
 		}
 		setTimeout(() => {
 			if (value === actualQuestion.correct_answer) {
@@ -122,7 +124,7 @@ function Question() {
 						{actualAnswers.map(answer => (
 							<button
 								className={
-									!showCorrectAnswers
+									showCorrectAnswers
 										? answer.correctAnswer
 											? "correct-answers"
 											: "incorrect-answers"

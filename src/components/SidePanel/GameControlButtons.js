@@ -4,7 +4,7 @@ import ResultsUserContext from "../../context/resultsUserContext"
 import "../styles/gameControlButtons.css"
 
 function GameControlButtons() {
-	const { handleClickFinish, handleFinishGame } = useContext(GameControlContext)
+	const { handleClickFinish, handleFinishGame, finishGame } = useContext(GameControlContext)
 	const { addCashWin } = useContext(ResultsUserContext)
 	const { points, cash } = useContext(ResultsUserContext)
 
@@ -19,7 +19,7 @@ function GameControlButtons() {
 				</button>
 				<span className='tooltip-text-game-control-buttons'>Start the game again!</span>
 			</div>
-			{points ? (
+			{points && !finishGame ? (
 				<div className='tooltip-game-control-buttons'>
 					<a
 						onClick={() => {

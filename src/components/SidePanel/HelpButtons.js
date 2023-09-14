@@ -7,6 +7,7 @@ function HelpButtons() {
 	const {
 		actualAnswers,
 		btnHelpList,
+		finishGame,
 		handleBtnHelpList,
 		handleHelpFiftyFifty,
 		handleActualAnswers,
@@ -65,7 +66,7 @@ function HelpButtons() {
 		console.log("helpUser")
 	}
 
-	if (!actualAnswers) return null
+	if (!actualAnswers || finishGame) return null
 
 	return (
 		<div className="box-help-buttons">
